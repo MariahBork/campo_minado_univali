@@ -23,20 +23,26 @@ def exibirMapa(matriz):
     for i in matriz:
         print(i)
 
-def revelarEspaco(mapa, linha, coluna):
+def revelarEspaco(mapa, linha, coluna, tamanho):
     if(mapa[linha][coluna] == 1):
         return False, "X"
     else:
-        simbolo = verificarEspaco(mapa, linha, coluna)
+        simbolo = verificarEspaco(mapa, linha, coluna, tamanho)
         return True, simbolo
     
-def verificarEspaco(mapa, linha, coluna):
+def verificarEspaco(mapa, linha, coluna, tamanho):
     contador = 0
-    array = [mapa[linha-1][coluna-1], mapa[linha-1][coluna], mapa[linha-1][coluna+1], mapa[linha][coluna-1], mapa[linha][coluna+1], mapa[linha+1][coluna-1], mapa[linha+1][coluna], mapa[linha+1][coluna+1]]
-    for espaco in array:
-        if(espaco == 1):
-            contador+=1
+    adj = []
+    for x in range(-1, 2):
+        for y in range(-1, 2):
+            newX, newY = linha + x, coluna + y
+            
+            if 0 <= newX < tamanho and 0 <= newY < tamanho and (x, y) != (0, 0):
+                adj.append((newX, newY))
+    for (x, y) in adj:
+        if mapa[x][y] == 1:
+            contador += 1
     if(contador > 0):
         return contador
-    else:
-        return "-"
+    else: 
+        return adj 
