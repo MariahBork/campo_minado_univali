@@ -30,35 +30,25 @@ def revelarEspaco(mapa, linha, coluna, tamanho):
         simbolo = verificarEspaco(mapa, linha, coluna, tamanho)
         return True,simbolo
     
-    
-
-    
 def verificarEspaco(mapa, linha, coluna, tamanho):
     contador = 0
     adj = []
-    
     for x in range(-1, 2):
         for y in range(-1, 2):
             newX, newY = linha + x, coluna + y
-            
             if 0 <= newX < tamanho and 0 <= newY < tamanho and (x, y) != (0, 0):
                 adj.append((newX, newY))
-                
-    
     for (x, y) in adj:
         if mapa[x][y] == 1:
             contador += 1
-           
     return contador, adj
-    
 
-    
-    
-    
-    
-    
-    
+def verificarVitoria(matriz, tamanho):
+    total = tamanho * tamanho
+    bombas = tamanho - 1
+    abertas = total - np.count_nonzero(matriz == '#')
 
-    
-
-        
+    if abertas == total - bombas:
+        return False, True
+    else:
+        return True, False

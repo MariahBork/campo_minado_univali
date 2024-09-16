@@ -8,6 +8,7 @@ mapa, tamanho = func.criarMapa(arquivo)
 matriz = func.mapaUsuario(tamanho)
 
 run = True
+vitoria = False
 
 while(run):
     func.exibirMapa(matriz)
@@ -21,7 +22,6 @@ while(run):
         run, matriz[linha][coluna] = saida
     else:
         if(saida_[0] > 0):
-            # bota != de 0
             run = saida[0]
             matriz[linha][coluna] = saida_[0]
         elif isinstance(saida_[1], list):
@@ -34,8 +34,8 @@ while(run):
                 cont_ = cont[0]
                 if cont_ > 0:
                     matriz[x][y] = cont_
-    
-        
-    
-    
-print("Game Over")
+    run, vitoria = func.verificarVitoria(matriz, tamanho)
+if(vitoria):
+    print("Você venceu!")
+else:
+    print("Game Over")
