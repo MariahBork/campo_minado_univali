@@ -28,21 +28,37 @@ def revelarEspaco(mapa, linha, coluna, tamanho):
         return False, "X"
     else:
         simbolo = verificarEspaco(mapa, linha, coluna, tamanho)
-        return True, simbolo
+        return True,simbolo
+    
+    
+
     
 def verificarEspaco(mapa, linha, coluna, tamanho):
     contador = 0
     adj = []
+    
     for x in range(-1, 2):
         for y in range(-1, 2):
             newX, newY = linha + x, coluna + y
             
             if 0 <= newX < tamanho and 0 <= newY < tamanho and (x, y) != (0, 0):
                 adj.append((newX, newY))
+                
+    
     for (x, y) in adj:
         if mapa[x][y] == 1:
             contador += 1
-    if(contador > 0):
-        return contador
-    else: 
-        return adj 
+           
+    return contador, adj
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+
+        

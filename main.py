@@ -16,14 +16,26 @@ while(run):
     linha-=1
     coluna-=1
     saida = func.revelarEspaco(mapa, linha, coluna, tamanho)
-    if isinstance(saida[1],int):
+    saida_ = saida[1]
+    if isinstance(saida_[0], str):
         run, matriz[linha][coluna] = saida
-    elif isinstance(saida[1], list):
-        matriz[linha][coluna] = '-'
-        booleano, lista = saida
-        for pos in lista:
-            x,y = pos
-            matriz[x][y] = '-'
     else:
-        run, matriz[linha][coluna] = saida
+        if(saida_[0] > 0):
+            # bota != de 0
+            run = saida[0]
+            matriz[linha][coluna] = saida_[0]
+        elif isinstance(saida_[1], list):
+            matriz[linha][coluna] = '-'
+            for pos in saida_[1]:
+                cont_= 0
+                x,y = pos
+                matriz[x][y] = '-'
+                cont = func.verificarEspaco(mapa,x,y,tamanho)
+                cont_ = cont[0]
+                if cont_ > 0:
+                    matriz[x][y] = cont_
+    
+        
+    
+    
 print("Game Over")
